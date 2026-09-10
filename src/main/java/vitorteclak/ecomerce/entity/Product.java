@@ -36,10 +36,10 @@ public class Product {
     @Column(length = 50, nullable = false)
     private String code;
 
-    @Column(nullable = false, name = "created_at")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(nullable = false, name = "updated_at")
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     public Product(String name, String technicalSpecifications, String description, String category, BigDecimal price, String code){
@@ -52,4 +52,14 @@ public class Product {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
+    public Product(String name, String technicalSpecifications, String description, String category, BigDecimal price, String code, LocalDateTime updatedAt){
+        this.name = name;
+        this.technicalSpecifications = technicalSpecifications;
+        this.description = description;
+        this.category = category;
+        this.price = price;
+        this.code = code;
+        this.updatedAt = updatedAt;
+    }
+
 }

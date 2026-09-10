@@ -9,6 +9,7 @@ import vitorteclak.ecomerce.entity.User;
 import vitorteclak.ecomerce.exceptions.NotFound;
 import vitorteclak.ecomerce.repository.ProductRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -35,11 +36,23 @@ public class ProductService {
                 .orElseThrow(() -> new NotFound("Product", "Not Found"));
         return product;
     }
-    public void editProduct(Long id, Product product){
-        product.setProductId(id);
-        productRepository.save(product);
+    public void editProduct(Long id, Product product) {
+
+        Product existingProduct = productRepository.findById(id)
+                .orElseThrow(() -> new NotFound("Product", "Not Found"));
+
+        existingProduct.setName(product.getName());
+        existingProduct.setTechnicalSpecifications(product.getTechnicalSpecifications());
+        existingProduct.setDescription(product.getDescription());
+        existingProduct.setCategory(product.getCategory());
+        existingProduct.setPrice(product.getPrice());
+        existingProduct.setCode(product.getCode());
+        existingProduct.setUpdatedAt(LocalDateTime.now());
+        productRepository.save(existingProduct);
     }
     public void deleteProductById(Long id){
-        productRepository.deleteById(id);
+        Product existingProduct = productRepository.findById(id)
+                .orElseThrow(() -> new NotFound("Product", "Not Found"));
+        productRepository.deleteById(existingProduct.getProductId());
     }
 }
