@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.stereotype.Service;
 import vitorteclak.ecomerce.entity.User;
+import vitorteclak.ecomerce.exceptions.TokenExpired;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -42,7 +43,7 @@ public class TokenService {
                     .verify(token)
                     .getSubject();
         } catch (JWTVerificationException e) {
-            return "";
+            throw new TokenExpired();
         }
     }
 
