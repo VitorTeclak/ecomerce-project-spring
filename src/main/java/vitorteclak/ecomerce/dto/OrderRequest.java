@@ -1,4 +1,10 @@
 package vitorteclak.ecomerce.dto;
 
-public record OrderRequest() {
-}
+import java.math.BigDecimal;
+
+public record OrderRequest(
+        Long userId,
+        String status,
+        String paymentMethod,
+        BigDecimal totalAmount
+) {}

@@ -1,4 +1,4 @@
 package vitorteclak.ecomerce.dto;
 
-public record UpdateStatusUpdateRequest() {
+public record UpdateStatusUpdateRequest(String status) {
 }
