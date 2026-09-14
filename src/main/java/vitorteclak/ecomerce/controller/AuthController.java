@@ -17,6 +17,7 @@ import vitorteclak.ecomerce.dto.RegisterDTO;
 import vitorteclak.ecomerce.entity.User;
 import vitorteclak.ecomerce.repository.UserRepository;
 import vitorteclak.ecomerce.service.AuthService;
+import vitorteclak.ecomerce.service.CartService;
 
 @RestController
 @RequestMapping("/auth")
@@ -31,6 +32,9 @@ public class AuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    CartService cartService;
 
     @Autowired
     TokenService tokenService;
@@ -52,7 +56,9 @@ public class AuthController {
         String encrypredPassword = new BCryptPasswordEncoder().encode(data.password());
         User newUser = new User(data.name(), data.email(), encrypredPassword, data.phone());
 
-        this.userRepository.save(newUser);
+        User savedUser = this.userRepository.save(newUser);
+
+        cartService.createCart(savedUser);
 
         return ResponseEntity.ok().build();
     }
