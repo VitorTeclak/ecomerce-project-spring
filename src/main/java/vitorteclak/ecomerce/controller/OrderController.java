@@ -3,8 +3,8 @@ package vitorteclak.ecomerce.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import vitorteclak.ecomerce.dto.OrderDTO;
-import vitorteclak.ecomerce.dto.OrderRequest;
-import vitorteclak.ecomerce.dto.UpdateStatusUpdateRequest;
+import vitorteclak.ecomerce.dto.request.OrderRequest;
+import vitorteclak.ecomerce.dto.request.UpdateStatusUpdateRequest;
 import vitorteclak.ecomerce.service.OrderService;
 
 import java.util.List;
